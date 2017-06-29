@@ -1,0 +1,16 @@
+
+---
+- hosts: all
+  connection: paramiko  # Workaround for windows hosts
+  become: yes  # Sudo
+  user: arma
+  
+  roles:
+    - wine20
+    - xvfb
+    - steamcmd
+    #- armaupdater
+    #- intercept
+    #- intercept-example
+    #- test-runner
+    #- jenkins

@@ -1,0 +1,46 @@
+---
+# Based on https://github.com/Kahn/ansible-steamcmd
+- name: Install 32bit libraries for steamcmd
+  apt: pkg=lib32gcc1 state=installed update_cache=true
+  when: ansible_architecture == 'x86_64'
+
+- name: Create steamcmd directory
+  file: path={{ steamcmd_user_homedir }}/steamcmd
+        owner={{ steamcmd_user }}
+        group={{ steamcmd_user }}
+        mode=0750
+        state=directory
+
+- name: Download steamcmd archive
+  uri: url={{ steamcmd_url }}
+       dest={{ steamcmd_user_homedir }}/steamcmd/steamcmd_linux.tar.gz
+       creates={{ steamcmd_user_homedir }}/steamcmd/steamcmd_linux.tar.gz
+       owner={{ steamcmd_user }}
+       group={{ steamcmd_user }}
+
+- name: Extract the steamcmd archive
+  unarchive: copy=no
+             src={{ steamcmd_user_homedir }}/steamcmd/steamcmd_linux.tar.gz
+             dest={{ steamcmd_user_homedir }}/steamcmd/
+             owner={{ steamcmd_user }}
+             group={{ steamcmd_user }}
+             creates={{ steamcmd_user_homedir }}/steamcmd/steamcmd.sh
+
+- name: Run steamcmd
+  shell: echo "quit" | ./steamcmd.sh
+  when: steamcmd_run_steamcmd == true
+  args:
+    chdir: "{{ steamcmd_user_homedir }}/steamcmd/"
+
+    
+# - name: attempt to log into steam
+  # become: yes
+  # become_user: steam
+  # command: /home/steam/steamcmd/steamcmd.sh +login {{ steam.user.name }} {{ steam.user.password }} +quit
+  # async: 60
+  # poll: 5
+  # register: steam_login
+
+# - name: Stop if manual intervention required
+  # fail: msg="You must manually authorize this server with Steam Guard before ansible can continue. Log into the server manually and run 'sudo -u steam /home/steam/steamcmd/steamcmd.sh +login <steam username>.'"
+  # when: steam_login|failed

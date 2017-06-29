@@ -1,0 +1,11 @@
+---
+- name: Add wine repository
+  apt_repository:
+    repo: 'ppa:ricotz/unstable'
+
+- name: Enable i386 architecture
+  lineinfile: dest=/var/lib/dpkg/arch line="i386" create=yes
+  #command: dpkg --add-architecture i386
+    
+- name: Install Wine
+  apt: pkg=wine-stable state=installed update_cache=true
