@@ -1,0 +1,6 @@
+runscript ../scripts/login
+
+@sSteamCmdForcePlatformType windows 
+force_install_dir /home/arma/armawindows
+app_update 233780 -beta development validate
+quit

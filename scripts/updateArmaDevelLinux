@@ -1,0 +1,5 @@
+runscript ../scripts/login
+
+force_install_dir /home/arma/armalinux
+app_update 233780 -beta development validate
+quit

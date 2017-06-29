@@ -9,8 +9,22 @@
     - wine20
     - xvfb
     - steamcmd
-    #- armaupdater
     #- intercept
     #- intercept-example
     #- test-runner
     #- jenkins
+
+  tasks:
+    - copy:
+        src: scripts
+        dest: /home/arma
+        force: no
+
+    - file:
+        path: /home/arma/scripts/updateArmaDevel.sh
+        mode: 0755
+
+    - file:
+        path: /home/arma/scripts/login
+        owner: arma
+        group: arma
