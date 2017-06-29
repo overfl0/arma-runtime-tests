@@ -1,6 +1,7 @@
 ---
 # Based on https://github.com/Kahn/ansible-steamcmd
 - name: Install 32bit libraries for steamcmd
+  become: yes
   apt: pkg=lib32gcc1 state=installed update_cache=true
   when: ansible_architecture == 'x86_64'
 

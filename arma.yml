@@ -2,13 +2,13 @@
 ---
 - hosts: all
   connection: paramiko  # Workaround for windows hosts
-  become: yes  # Sudo
   user: arma
   
   roles:
     - wine20
     - xvfb
     - steamcmd
+    - git
     #- intercept
     #- intercept-example
     #- test-runner
@@ -28,3 +28,11 @@
         path: /home/arma/scripts/login
         owner: arma
         group: arma
+
+    - git:
+        repo: https://github.com/overfl0/intercept-runtime-tests.git
+        dest: /home/arma/armawindows/mpmissions/intercept-runtime-tests
+
+    - git:
+        repo: https://github.com/overfl0/intercept-runtime-tests.git
+        dest: /home/arma/armalinux/mpmissions/intercept-runtime-tests

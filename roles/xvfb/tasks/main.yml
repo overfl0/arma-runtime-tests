@@ -1,3 +1,4 @@
 ---
 - name: Install Xvfb
+  become: yes
   apt: pkg=xvfb state=installed update_cache=true
