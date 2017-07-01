@@ -1,0 +1,4 @@
+---
+- name: Install expect (for unbuffer)
+  become: yes
+  apt: pkg=expect state=installed update_cache=true

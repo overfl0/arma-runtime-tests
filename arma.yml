@@ -9,6 +9,7 @@
     - xvfb
     - steamcmd
     - git
+    - unbuffer
     #- intercept
     #- intercept-example
     #- test-runner
