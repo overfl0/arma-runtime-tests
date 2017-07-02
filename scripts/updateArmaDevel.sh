@@ -2,4 +2,4 @@
 
 steamcmd="/home/arma/steamcmd/steamcmd.sh"
 
-unbuffer "${steamcmd}" "+runscript ../scripts/updateArmaDevelWindows" | grep -v login
+unbuffer -p "${steamcmd}" "+runscript ../scripts/updateArmaDevelWindows" | grep -v login
