@@ -1,0 +1,3 @@
+[all]
+
+your_VM_IP_here
